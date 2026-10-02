@@ -25,3 +25,10 @@ The trade-off: the recurrence is O(n) per evaluation. If you need to evaluate at
 - `n` must be a non-negative `int`. Booleans are rejected even though `isinstance(True, int)` is true in Python, because accepting `True` as degree 1 is a common source of silent bugs. `float` degrees like `3.0` are also rejected.
 - For `|x| > 1` the polynomials grow exponentially with n. The recurrence still computes a value, but floating-point error will dominate for large n in that region. This is inherent to the problem, not a bug in the recurrence.
 - Results are always `float`, including `T_0` which returns `1.0` rather than `1`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
